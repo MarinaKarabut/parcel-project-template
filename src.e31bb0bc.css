@@ -1466,6 +1466,12 @@ img {
   }
 }
 
+@media screen and (max-width: 767px) {
+  .hero-distribution.container {
+    padding: 0;
+  }
+}
+
 .list-social-hero::before {
   position: absolute;
   bottom: 40%;
@@ -1953,6 +1959,12 @@ img {
   border-color: white;
 }
 
+.slick-arrow.slick-prev:focus,
+.slick-arrow.slick-prev:hover {
+  color: white;
+  border-color: white;
+}
+
 /* Стрелка вправо */
 .slick-arrow.slick-next {
   font-weight: 600;
@@ -1973,6 +1985,12 @@ img {
   padding-left: 12px;
 }
 .slick-arrow.slick-next:focus, .slick-arrow.slick-next:hover {
+  color: white;
+  border-color: white;
+}
+
+.slick-arrow.slick-next:focus,
+.slick-arrow.slick-next:hover {
   color: white;
   border-color: white;
 }
