@@ -105,16 +105,20 @@ img {
   height: 100%;
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.8);
-  background-repeat: no-repeat;
-  background-size: cover;
   visibility: visible;
   opacity: 1;
-  transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .backdrop.is-hidden {
   opacity: 0;
   visibility: hidden;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) 250ms;
   pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .header .modal-button {
@@ -158,7 +162,22 @@ img {
   display: block;
   margin-right: 70px;
 }
+.logo-link > svg:hover {
+  animation: svg 1.5s;
+}
 
+.logo-link > svg:hover {
+  animation: svg 1.5s;
+}
+
+@keyframes svg {
+  70% {
+    transform: rotate(380deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .mobile-menu {
   position: absolute;
   min-width: 337px;
@@ -338,8 +357,8 @@ img {
   max-height: 610px;
   max-width: 450px;
   overflow-y: scroll;
-  transform: translate(-50%, -50%) scaleY(1);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1) 250ms;
   visibility: visible;
   background-color: white;
 }
@@ -422,7 +441,6 @@ img {
   height: 40px;
   border: none;
   box-sizing: border-box;
-  border-radius: 4px;
   padding-left: 42px;
   background-color: transparent;
   border-bottom: 1px solid #212121;
@@ -458,7 +476,6 @@ img {
   resize: none;
   margin-top: 4px;
   margin-bottom: 20px;
-  border-radius: 4px;
   padding: 12px 16px;
   background-color: transparent;
   border: none;
@@ -529,6 +546,10 @@ img {
   background-color: var(--accent-color);
   border-radius: 3px;
   border: none;
+}
+
+.modal-contact-form__policy-check:focus + .modal-contact-form__policy-label::before {
+  border: 1px solid var(--accent-color);
 }
 
 @media screen and (min-width: 1200px) {
@@ -630,16 +651,17 @@ img {
   }
   .about-wrapper {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   .about-left-side {
-    width: 50%;
-    margin-right: 30px;
+    width: calc((100% - 30px) / 2);
   }
   .about-second-list {
-    width: 50%;
+    width: calc((100% - 30px) / 2);
   }
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1199px) {
   .about-item:not(:last-child) {
     margin-bottom: 30px;
   }
@@ -656,9 +678,11 @@ img {
   }
   .about-list {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
-  .about-item:not(:last-child) {
-    margin-right: 30px;
+  .about-item {
+    width: calc((100% - 30px) / 2);
   }
   .about-second-list {
     padding: 0 60px 0 34px;
@@ -729,20 +753,22 @@ img {
 .advantages-list {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  margin: 0 auto;
 }
 .advantages-list-item {
   text-align: center;
-  width: calc(50% - 15px);
-  min-height: 133px;
   padding: 20px 36px;
   background-color: #f7f7f7;
+  width: calc((100% - 30px) / 2);
 }
-.advantages-list-item:nth-child(even) {
-  margin-top: 30px;
+.advantages-list-item:nth-child(2n) {
+  margin: 0;
+  margin-bottom: 30px;
+  transform: translateY(30px);
 }
 .advantages-list-item:not(:nth-child(even)) {
   margin-right: 30px;
+  margin-bottom: 30px;
 }
 .advantages-list-count {
   position: relative;
@@ -787,17 +813,17 @@ img {
     padding: 100px 0;
   }
   .advantages-right-side {
-    width: 450px;
-    margin-right: auto;
+    width: calc((100% - 15px) / 6 * 4);
   }
   .advantages-left-side {
-    width: 450px;
     margin-left: auto;
+    width: calc((100% - 15px) / 6 * 4);
   }
   .advantages-list-item {
     width: 210px;
     min-height: 133px;
     padding: 20px 44px;
+    width: calc((100% - 30px) / 2);
     background-color: #f7f7f7;
   }
 }
@@ -810,20 +836,17 @@ img {
     flex-direction: row-reverse;
   }
   .advantages-right-side {
-    width: 570px;
+    width: calc((100% - 30px) / 2);
     margin-left: auto;
   }
   .advantages-left-side {
-    width: 568px;
+    width: calc((100% - 30px) / 2);
     margin-right: auto;
-    display: flex;
   }
   .advantages-list {
-    display: flex;
-    justify-content: center;
+    width: calc((100% - 15px) / 6 * 4);
   }
   .advantages-list-item {
-    width: 170px;
     min-height: 133px;
     padding: 20px 24px;
     background-color: #f7f7f7;
@@ -1512,6 +1535,12 @@ img {
   }
 }
 
+@media screen and (max-width: 767px) {
+  .hero-distribution.container {
+    padding: 0;
+  }
+}
+
 .price-section {
   display: block;
   width: 100%;
@@ -1914,9 +1943,14 @@ img {
   color: rgba(157, 164, 189, 0.6);
   border-color: rgba(157, 164, 189, 0.6);
   outline: none;
+  transition: color 250ms linear;
   padding-left: 0px;
   padding-right: 12px;
   text-align: left;
+}
+.slick-arrow.slick-prev:focus, .slick-arrow.slick-prev:hover {
+  color: white;
+  border-color: white;
 }
 
 /* Стрелка вправо */
@@ -1934,8 +1968,13 @@ img {
   color: rgba(157, 164, 189, 0.6);
   border-color: rgba(157, 164, 189, 0.6);
   outline: none;
+  transition: color 250ms linear;
   padding-left: 0px;
   padding-left: 12px;
+}
+.slick-arrow.slick-next:focus, .slick-arrow.slick-next:hover {
+  color: white;
+  border-color: white;
 }
 
 /* Стрелка не активная */
