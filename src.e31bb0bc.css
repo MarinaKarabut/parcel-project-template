@@ -1410,6 +1410,7 @@ img {
 .hero-title {
   font-family: "Raleway";
   margin-bottom: 20px;
+  color: white;
 }
 @media screen and (min-width: 480px) {
   .hero-title {
@@ -1590,12 +1591,16 @@ img {
   margin-bottom: 50px;
   background: linear-gradient(180deg, #171a24 0%, rgba(23, 26, 36, 0.2) 100%);
 }
-.price-list .price-list-item {
+
+.price-list-left .price-list-item {
   margin-bottom: 20px;
 }
 
-.price-list-right .price-list-item:last-child {
-  margin-bottom: 0;
+.price-list-right {
+  margin-bottom: 30px;
+}
+.price-list-right .price-list-item:not(:last-child) {
+  margin-bottom: 20px;
 }
 
 .price-list-item {
@@ -1680,6 +1685,7 @@ img {
 
   .price-list-right {
     padding: 30px 40px;
+    margin-bottom: 0;
     width: 50%;
     background: linear-gradient(180deg, #090b13 0%, rgba(9, 11, 19, 0.2) 100%);
   }
@@ -2058,6 +2064,7 @@ img {
 .slider .slick-dots li.slick-active button {
   padding: 1px 9px;
   /* background: white; */
+  background: white;
 }
 
 @media screen {
