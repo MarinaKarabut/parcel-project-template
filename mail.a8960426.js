@@ -117,22 +117,50 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/modal.js":[function(require,module,exports) {
-(function () {
-  var refs = {
-    openModalBtn: document.querySelectorAll('[data-modal-open]'),
-    closeModalBtn: document.querySelector('[data-modal-close]'),
-    modal: document.querySelector('[data-modal]')
-  };
-  refs.closeModalBtn.addEventListener('click', toggleModal);
-  refs.openModalBtn.forEach(function (openModalBtn) {
-    openModalBtn.addEventListener('click', toggleModal);
+})({"js/mail.js":[function(require,module,exports) {
+$("#contact-form").submit(function () {
+  var form = $(this);
+  var error = false;
+  form.find("textaria, input").each(function () {
+    if ($(this).val() == "") {
+      error = true;
+      console.log("empty field: validation error");
+    }
   });
 
-  function toggleModal() {
-    refs.modal.classList.toggle('is-hidden');
+  if (!error) {
+    var data = form.serialize();
+    $.ajax({
+      type: "POST",
+      url: "../mail.php",
+      dataType: "json",
+      data: data,
+      beforeSend: function beforeSend(data) {
+        form.find('button[type="submit"]').attr("disabled", "disabled");
+      },
+      success: function success(data) {
+        if (data["error"]) {
+          alert(data["error"]);
+          form.trigger("reset");
+          console.log("error data");
+        } else {
+          form[0].reset();
+          console.log("success");
+        }
+      },
+      error: function error(xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      },
+      complete: function complete(data) {
+        form.find('button[type="submit"]').prop("disabled", false);
+        console.log("complete");
+      }
+    });
   }
-})();
+
+  return false;
+});
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -337,5 +365,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/modal.js"], null)
-//# sourceMappingURL=/modal.4331011c.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/mail.js"], null)
+//# sourceMappingURL=/mail.a8960426.js.map
